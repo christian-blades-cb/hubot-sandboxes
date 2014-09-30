@@ -1,0 +1,21 @@
+{
+  "name": "hubot-sandboxes",
+  "version": "0.0.1",
+  "description": "Keep track of which developer is using which sandbox",
+  "main": "./sandboxes.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hubot"
+  ],
+  "author": "Christian Blades <christian.blades@careerbuilder.com>",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.8.3"
+  },
+  "respository": {
+    "type": "git",
+    "url": "https://github.com/christian-blades-cb/hubot-sandboxes"
+  }
+}
