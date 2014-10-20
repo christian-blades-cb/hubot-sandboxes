@@ -1,8 +1,8 @@
 {
   "name": "hubot-sandboxes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Keep track of which developer is using which sandbox",
-  "main": "./sandboxes.coffee",
+  "main": "sandboxes.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
