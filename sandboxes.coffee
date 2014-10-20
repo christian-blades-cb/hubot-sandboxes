@@ -14,6 +14,10 @@
 #   hubot release sandbox <name> - Free a sandbox for use by someone else
 #   hubot add sandbox <name> - Add a new sandbox
 #   hubot delete|remote sandbox <name> - Delete a sandbox
+#   hubot show queue - show all of the suckers waiting for the next sandbox
+#   hubot queue sandbox - add yourself to the queue for the next released sandbox
+#   hubot dequeue|unqueue sandbox - remove youself from the queue
+#   hubot remove [username] from queue - remove some jerk from the queue
 #
 # Notes:
 #   sandbox names are stored lowercased
