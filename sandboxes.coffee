@@ -9,7 +9,7 @@
 #
 # Commands:
 #   hubot list|show sandboxes - List the sandboxes and their availability
-#   hubot assign sandbox <name> to @<user> - Assign a sandbox to a user
+#   hubot assign sandbox <name> to <user> - Assign a sandbox to a user
 #   hubot I'm using sandbox <name> - Assign a sandbox to yourself
 #   hubot release sandbox <name> - Free a sandbox for use by someone else
 #   hubot add sandbox <name> - Add a new sandbox
@@ -17,7 +17,7 @@
 #   hubot show queue - show all of the suckers waiting for the next sandbox
 #   hubot queue sandbox - add yourself to the queue for the next released sandbox
 #   hubot dequeue|unqueue sandbox - remove youself from the queue
-#   hubot remove [username] from queue - remove some jerk from the queue
+#   hubot remove <user> from queue - remove some jerk from the queue
 #
 # Notes:
 #   sandbox names are stored lowercased
@@ -51,7 +51,7 @@ module.exports = (robot) ->
     msg.send "Sandboxes:\n" + human_text.join("\n")
 
 
-  robot.respond /assign s(?:andbox)? ([A-Za-x0-9-_]+) to @?([A-Za-x0-9-_]+)/i, (msg) ->
+  robot.respond /assign s(?:andbox)? ([A-Za-x0-9-_]+) to ([A-Za-x0-9-_ ]+)/i, (msg) ->
     user_id = robot.brain.userForName(msg.match[2])?.id
     return msg.reply "I have no idea who you're talking about" unless user_id
 
@@ -83,7 +83,7 @@ module.exports = (robot) ->
   robot.respond /(de|un)queue s(?:andbox)/i, (msg) ->
     dequeue msg.message.user.id, msg
 
-  robot.respond /remove @?([A-Za-x0-9-_]+) from q(?:ueue)?/i, (msg) ->
+  robot.respond /remove ([A-Za-x0-9-_ ]+) from q(?:ueue)?/i, (msg) ->
     user_id = robot.brain.userForName(msg.match[1])?.id
     dequeue user_id, msg
 
