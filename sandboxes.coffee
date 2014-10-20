@@ -26,7 +26,7 @@ moment = require 'moment'
 module.exports = (robot) ->
   robot.brain.on 'loaded', =>
     robot.brain.data.sandboxes ||= {}
-    robot.brain.data.sandboxQueue ||= new SimpleQueue
+    robot.brain.data.sandboxQueue = new SimpleQueue(robot.brain.data.sandboxQueue || [])
 
 
   robot.respond /(list|show) sandboxes/i, (msg) ->
@@ -68,15 +68,15 @@ module.exports = (robot) ->
     queue = robot.brain.data.sandboxQueue
     waiting = queue.dequeue()
     if waiting
-      username = robot.brain.userForId(waiting)
+      username = robot.brain.userForId(waiting).name
       msg.reply "Auto-assigning sandbox to @" + username
       assignSandbox waiting, sandbox_name, msg
 
 
-  robot.respond /queue sandbox/i, (msg) ->
+  robot.respond /queue s(?:andbox)/i, (msg) ->
     queue msg.message.user.id, msg
 
-  robot.respond /(de|un)queue sandbox/i, (msg) ->
+  robot.respond /(de|un)queue s(?:andbox)/i, (msg) ->
     dequeue msg.message.user.id, msg
 
   robot.respond /remove @?([A-Za-x0-9-_]+) from q(?:ueue)?/i, (msg) ->
@@ -118,6 +118,7 @@ module.exports = (robot) ->
 
   robot.respond /disassemble sandboxes/i, (msg) ->
     robot.brain.data.sandboxes = {}
+    robot.brain.data.sandboxQueue = {}
     clearQueue()
     msg.send "Bye bye Johnny 5"
 
@@ -172,8 +173,8 @@ class Sandbox
 
 # a very simple queue that doesn't allow duplicates and can be iterated
 class SimpleQueue
-  constructor: () ->
-    @_queue = []
+  constructor: (options) ->
+    @_queue = options._queue || []
 
   enqueue: (item) ->
     if @isQueued item
@@ -197,4 +198,3 @@ class SimpleQueue
 
   items: () ->
     return @_queue
-  
