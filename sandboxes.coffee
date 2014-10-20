@@ -77,10 +77,10 @@ module.exports = (robot) ->
       assignSandbox waiting, sandbox_name, msg
 
 
-  robot.respond /queue s(?:andbox)/i, (msg) ->
+  robot.respond /queue s(?:andbox)?/i, (msg) ->
     queue msg.message.user.id, msg
 
-  robot.respond /(de|un)queue s(?:andbox)/i, (msg) ->
+  robot.respond /(de|un)queue s(?:andbox)?/i, (msg) ->
     dequeue msg.message.user.id, msg
 
   robot.respond /remove ([A-Za-x0-9-_ ]+) from q(?:ueue)?/i, (msg) ->
